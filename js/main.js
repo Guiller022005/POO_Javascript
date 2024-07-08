@@ -148,8 +148,57 @@ class Rectangulo extends Figura {
 //Instancia para Rectangulo
 const rectangulo1 = new Rectangulo ("Green", null, 7, 3);
 
-document.querySelector("#saludo").innerHTML = /*html*/ `
-    <h5>Figura: <span>${figura1.color}</span></h5>
-    <h5><span>${Figura.calcularArea(figura1)}</span></h5>
-    <h5><span>${Rectangulo.calcularArea(rectangulo1)}</span></h5>
+// document.querySelector("#saludo").innerHTML = /*html*/ `
+//     <h5>Figura: <span>${figura1.color}</span></h5>
+//     <h5><span>${Figura.calcularArea(figura1)}</span></h5>
+//     <h5><span>${Rectangulo.calcularArea(rectangulo1)}</span></h5>
+// `;
+
+class Vehiculo {
+    constructor(marca, modelo, velocidad) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.velocidad = velocidad;
+    }
+
+    acelerar() {
+        this.velocidad += 10;
+        return this.velocidad;
+    }
+
+    static convertirKmHEnMph(velocidadKmH) {
+        // Divide la velocidad en km por hora entre 1.60934
+        return velocidadKmH / 1.60934;
+    }
+}
+
+// Crear una instancia para vehiculo
+const vehiculo1 = new Vehiculo("Chevrolet", "Camaro Z-10", 150);
+vehiculo1.acelerar();
+
+class Coche extends Vehiculo {
+    constructor(marca, modelo, velocidad, combustible) {
+        super(marca, modelo, velocidad);
+        this.combustible = combustible;
+    }
+
+    acelerar() {
+        this.velocidad += 20;
+        return this.velocidad;
+    }
+}
+
+// Instancia para coche
+const coche1 = new Coche("Lamborghini", "Huracan", 250, "Gasolina");
+coche1.acelerar();
+
+// Convertir la velocidad del coche a mph
+const velocidadMph = Vehiculo.convertirKmHEnMph(coche1.velocidad).toFixed(2);
+
+document.querySelector("#saludo").innerHTML = `
+    <h5>Marca del Vehiculo: <span>${coche1.marca}</span></h5>
+    <h5>Modelo: <span>${coche1.modelo}</span></h5>
+    <h5>Velocidad: <span>${coche1.velocidad} km/h</span></h5>
+    <h5>Velocidad en Mph: <span>${velocidadMph} mph</span></h5>
+    <h5>Combustible Disponible: <span>${coche1.combustible}</span></h5>
 `;
