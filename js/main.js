@@ -195,10 +195,73 @@ coche1.acelerar();
 // Convertir la velocidad del coche a mph
 const velocidadMph = Vehiculo.convertirKmHEnMph(coche1.velocidad).toFixed(2);
 
+// document.querySelector("#saludo").innerHTML = `
+//     <h5>Marca del Vehiculo: <span>${coche1.marca}</span></h5>
+//     <h5>Modelo: <span>${coche1.modelo}</span></h5>
+//     <h5>Velocidad: <span>${coche1.velocidad} km/h</span></h5>
+//     <h5>Velocidad en Mph: <span>${velocidadMph} mph</span></h5>
+//     <h5>Combustible Disponible: <span>${coche1.combustible}</span></h5>
+// `;
+
+class Empleado {
+    constructor(nombre, edad, sueldo){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.sueldo = sueldo;
+        this.id = Empleado.generaldEmpleado();
+    }
+
+    calcularSalarioAnual(){
+        // Retornar salario anual del empleado (multiplicamos el sueldo mensual por 12)
+        return this.sueldo * 12;
+    }
+
+    static generaldEmpleado(){
+        //retorna un id unico para cada empleado, usar var estatica par incrementar el id cada vez q se cree una instancia de empleado
+        if (!this.proximoId) {
+            this.proximoId = 1; // Inicializar el contador estático si no existe
+        } else {
+            this.proximoId++; // Incrementar el contador estático
+        }
+        return this.proximoId;
+    }
+}
+
+// Instancia para Empleado
+const empleado1 = new Empleado("Albert", 24, 1200000);
+const salarioAnual = empleado1.calcularSalarioAnual();
+
+// document.querySelector("#saludo").innerHTML = `
+//     <h5>Nombre: <span>${empleado1.nombre}</span></h5>
+//     <h5>Edad: <span>${empleado1.edad}</span></h5>
+//     <h5>Salario Anual: <span>${salarioAnual}</span></h5>
+// `;
+
+class Gerente extends Empleado {
+    constructor(nombre, edad, sueldo, departamento){
+        super(nombre, edad, sueldo);
+        this.departamento = departamento;
+    }
+
+    calcularSalarioAnualConBono(){
+        // Calcular salario anual con bono del 10%
+        const salarioConBono = this.sueldo * 1.1;
+        const salarioAnual = salarioConBono * 12;
+
+        // Formatear el salario anual para que sea más entendible
+        const salariototal = salarioAnual.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        
+        return salariototal;
+    }
+}
+// Instancia para Gerente con salario inicial de 1400000
+const gerente1 = new Gerente("Alejo", 26, 1400000, "Ventas");
+const salarioAnualGerenteConBono = gerente1.calcularSalarioAnualConBono();
+
 document.querySelector("#saludo").innerHTML = `
-    <h5>Marca del Vehiculo: <span>${coche1.marca}</span></h5>
-    <h5>Modelo: <span>${coche1.modelo}</span></h5>
-    <h5>Velocidad: <span>${coche1.velocidad} km/h</span></h5>
-    <h5>Velocidad en Mph: <span>${velocidadMph} mph</span></h5>
-    <h5>Combustible Disponible: <span>${coche1.combustible}</span></h5>
+    <h5>Nombre: <span>${gerente1.nombre}</span></h5>
+    <h5>Edad: <span>${gerente1.edad}</span></h5>
+    <h5>Salario Anual con Bono: <span>${salarioAnualGerenteConBono} COP</span></h5>
+    <h5>Departamento: <span>${gerente1.departamento}</span></h5>
+    <h5>Id: <span>${gerente1.id}</span></h5>
 `;
