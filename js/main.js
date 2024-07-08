@@ -8,14 +8,26 @@ class Persona {
     static saludar(persona) {
         return `Hola, ¿cómo estás ${persona.nombre}?`;
     }
+
+    static esMayorDeEdad(edad){
+        if(edad >= 18){
+            return 'True';
+        } else{
+            return 'False';
+        }
+    }
 }
 
 // Crear una instancia de la clase Persona
 const persona1 = new Persona("Guillermo", 19, "M");
 
-document.querySelector("#saludo").innerHTML = /*html*/`
-    <h1>Nombre: <span>${Persona.saludar(persona1)}</span></h1>
-`;
+const mayorDeEdad = Persona.esMayorDeEdad(persona1.edad);
+console.log(`Es ${persona1.nombre} mayor de edad? ${mayorDeEdad}`);
+
+// document.querySelector("#saludo").innerHTML = /*html*/`
+//     <h1>Nombre: <span>${Persona.saludar(persona1)}</span></h1>
+    
+// `;
 
 class Estudiante extends Persona{
     carrera;
@@ -35,4 +47,5 @@ const estudiante1 = new Estudiante("Guillermo", 19, "M", "Desarrollador de Softw
 document.querySelector("#saludo").innerHTML = /*html*/`
     <h1>Nombre: <span>${Persona.saludar(estudiante1)}</span></h1>
     <h2>Carrera: <span>${Estudiante.estudiar(estudiante1)}</span></h2>
-`;
+    <h3>Mayor de Edad: <span>${Persona.esMayorDeEdad(persona1.edad)}</span></h3>
+    `;
