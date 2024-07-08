@@ -82,8 +82,74 @@ class Perro extends Animal{
     }
 }
 
+// document.querySelector("#saludo").innerHTML = /*html*/ `
+//     <h4>Nombre: <span>${animal1.nombre}</span></h4>
+//     <h4>Sonido: <span>${Animal.hacerSonido(animal1)}</span></h4>
+//     <h4>Estado: <span>${Perro.moverCola(animal1)}</span></h4>
+// `;
+
+
+class Figura {
+    constructor(color, area){
+        this.color = color;
+        this.area = area;
+    }
+
+    static calcularArea(figura){
+        return `Area: ${figura.area}`;
+    }
+}
+
+//Crear una instancia para mi figurea
+const figura1 = new Figura ("Azul", 24);
+
+// document.querySelector("#saludo").innerHTML = /*html*/ `
+//     <h5>Figura: <span>${figura1.color}</span></h5>
+//     <h5><span>${Figura.calcularArea(figura1)}</span></h5>
+// `;
+
+class Circulo extends Figura {
+    radio;
+    constructor(color, area, radio) {
+        super(color, area);
+        this.radio = radio;
+    }
+
+    static calcularArea(circulo){
+        const area = Math.PI * circulo.radio **2;
+        return `Area del Circulo: ${area.toFixed(2)}`;
+    }
+}
+
+//Instancia para circulo
+const circulo1 = new Circulo ("Yellow",0, 8);
+
+// document.querySelector("#saludo").innerHTML = /*html*/ `
+//     <h5>Figura: <span>${figura1.color}</span></h5>
+//     <h5><span>${Figura.calcularArea(figura1)}</span></h5>
+//     <h5><span>${Circulo.calcularArea(circulo1)}</span></h5>
+// `;
+
+class Rectangulo extends Figura {
+    largo;
+    ancho;
+    constructor(color, area, largo, ancho) {
+        super(color, area);
+        this.largo = largo;
+        this.ancho = ancho;
+    }
+
+    static calcularArea(rectangulo){
+        const area = rectangulo.largo * rectangulo.ancho;
+        return `Área del Rectángulo: ${area}`;
+    }
+}
+
+//Instancia para Rectangulo
+const rectangulo1 = new Rectangulo ("Green", null, 7, 3);
+
 document.querySelector("#saludo").innerHTML = /*html*/ `
-    <h4>Nombre: <span>${animal1.nombre}</span></h4>
-    <h4>Sonido: <span>${Animal.hacerSonido(animal1)}</span></h4>
-    <h4>Estado: <span>${Perro.moverCola(animal1)}</span></h4>
+    <h5>Figura: <span>${figura1.color}</span></h5>
+    <h5><span>${Figura.calcularArea(figura1)}</span></h5>
+    <h5><span>${Rectangulo.calcularArea(rectangulo1)}</span></h5>
 `;
